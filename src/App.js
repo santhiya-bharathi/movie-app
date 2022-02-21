@@ -6,7 +6,6 @@ import { Switch, Route, useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import InfoIcon from '@mui/icons-material/Info';
@@ -50,8 +49,9 @@ useEffect(()=>{
        <AppBar position="static">
        <Toolbar>
        <Button varient="text" color="inherit" onClick={()=>history.push("/")}>Home</Button>
-       <Button varient="text" color="inherit" onClick={()=>history.push("/addmovies")}>AddMovies</Button>
-       <Button varient="text" color="inherit" onClick={()=>history.push("/movielist")}>Movielist</Button>
+
+       <Button varient="text" color="inherit" onClick={()=>history.push("/login")}>Log in</Button>
+       <Button varient="text" color="inherit" onClick={()=>history.push("/signup")}>Sign up</Button>
 
        <Button varient="text" color="inherit" style={{marginLeft:"auto"}} onClick={()=>setMode(mode==="light"? "dark":"light")}> {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />} {mode==="light"? "Dark":"Light"}Mode</Button>
        </Toolbar>
@@ -61,6 +61,10 @@ useEffect(()=>{
       
       <Route exact path="/">
           <Home />
+        </Route>
+
+        <Route path="/homepage">
+          <Homepage />
         </Route>
 
         <Route path="/addmovies">
@@ -78,6 +82,27 @@ useEffect(()=>{
         <Route path="/movielist">
         <MovieList />
         </Route>
+
+        <Route path="/signupsuccess">
+          <SignupSuccess />
+        </Route>
+
+        <Route path="/signupfailed">
+          <SignupFailed />
+        </Route>
+
+        <Route path="/loginfailed">
+          <LoginFailed />
+        </Route>
+
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+        
+          <Route path="/signup">
+          <SignupPage />
+        </Route>
+
 
         <Route path="**">
           <NotFound/>
@@ -103,11 +128,23 @@ function NotFound(){
   );
 }
 
+function Homepage(){
+  const history = useHistory();
+  return(
+    <div>
+      <h3 className="homepage-text">For Explore Movies Click here</h3>
+      <Button variant="outlined" color="secondary" onClick={()=>history.push("/movielist")}>Movielist</Button>
+       <h3 className="homepage-text">For Add Movies Click here</h3>
+       <Button variant="outlined" color="secondary" onClick={()=>history.push("/addmovies")}>AddMovies</Button>
+    </div>
+  );
+}
+
 function Home() {
   return (
     <div className="home">
-      <h2 className="home-hello">Hello All!!!</h2>
-      <img className="home-pic" src="https://c.tenor.com/NuKLjcqaiqsAAAAC/welcome.gif" alt="welcome"/>
+      <h2 className="home-hello">Welcome to movies app</h2>
+       <h6 className="home-det">you can explore movies after signup or login</h6>
     </div>
   );
 }
@@ -132,8 +169,8 @@ useEffect(()=>{
     fontWeight:"bold"
   };
   return(
-  <div className="details">
-        <iframe width="1430" height="650" src={moviedet.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div className="details-div">
+        <iframe className='iframe-size' width="1000" height="500" src={moviedet.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         
         <div className="det"> 
         <h1 className="user-name">{moviedet.name}</h1>
@@ -187,7 +224,7 @@ function UpdateMovie({moviedet}){
    
     console.log(updatedMovie);
 
-  fetch(`${API_URL}/movies/${moviedet.id}`, {
+  fetch(`${API_URL}/movies/${moviedet._id}`, {
     method:"PUT",
     body: JSON.stringify(updatedMovie),
     headers: {'Content-Type': 'application/json'},
@@ -198,6 +235,7 @@ function UpdateMovie({moviedet}){
   return(
     <form onSubmit={handleSubmit} className="in-con">
     
+
     <TextField id="pic" 
       name="pic" 
       value = {values.pic} 
@@ -344,26 +382,13 @@ console.log(newMovies)
       variant="filled" />
      
       <Button type="submit" variant="contained">Add movies</Button>
+     <Button onClick={()=>history.push("/homepage") }variant="outlined"><KeyboardBackspaceIcon/>Homepage</Button>
      
     </form>
   );
 } 
 
-function Counter(){
-  const [like, setLike] = useState(0);
-  const [disLike, setDisLike] = useState(0);
-  return(
-<div className="button-like">
-<IconButton onClick={()=> setLike(like+1)} aria-label="like">
-<Badge badgeContent={like} color="primary">👍</Badge>
-      </IconButton>
-      <IconButton onClick={()=> setDisLike(disLike+1)} aria-label="dislike">
-<Badge badgeContent={disLike} color="error">👎</Badge>
-      </IconButton>
-  
-  </div>
-  );
-}
+
 function MovieList(){
   const [movies, setMovies] = useState([]);
  
@@ -376,14 +401,15 @@ const getMovies = () => {
 
 useEffect(getMovies, []);
 
-const deleteMovie = (id) =>{
-  fetch(`${API_URL}/movies/${id}`, {method:"DELETE"})
+const deleteMovie = (_id) =>{
+  fetch(`${API_URL}/movies/${_id}`, {method:"DELETE"})
   .then(()=>getMovies());
 };
 
   const history = useHistory();
   return(
-    <section>
+    <section className='movies-section'>
+      
          {movies.map(({pic, name, rating, summary, id, _id})=>(
        <Movie key={_id} name={name} pic={pic} rating={rating} summary={summary} id={_id}
        deleteButton= {<IconButton aria-label="delete" color="error"
@@ -391,13 +417,15 @@ const deleteMovie = (id) =>{
        <DeleteIcon />
      </IconButton>}
        editButton= {<IconButton 
-        style={{marginLeft:"auto"}}
         aria-label="edit"  color="success"
        onClick={()=>history.push("/movielist/edit/" + _id)}>
        <EditIcon />
      </IconButton>}
        />
      ))}
+     <div>
+     <Button onClick={()=>history.push("/homepage") }variant="outlined"><KeyboardBackspaceIcon/>Homepage</Button>
+     </div>
     </section>
   );
 }
@@ -437,7 +465,7 @@ const summaryStyles = {
       </div>
  
       {show?<p style={summaryStyles}>{summary}</p>:""}
-      <div className="count-edit"><Counter/>
+      <div className="count-edit">
 {editButton}{deleteButton}</div>
       
       
@@ -446,5 +474,166 @@ const summaryStyles = {
     </div>
     
     
+  );
+}
+
+
+function LoginPage(){
+  const history = useHistory();
+  const formvalidationschema = yup.object({
+    email: yup.string().min(5, "need a bigger email").required(),
+    password: yup.string().min(5).max(12).required(),
+  });
+
+  const {handleSubmit, values, handleChange, handleBlur, errors, touched} = useFormik({
+    initialValues: { email: "", password:""},
+    validationSchema: formvalidationschema,
+
+    onSubmit: (newlogin) => {
+      console.log("onsubmit", newlogin);
+      addData(newlogin);
+    }
+  });
+
+  const addData =(newlogin)=>{
+    console.log(newlogin)
+      fetch(`${API_URL}/login`, {
+        method:"POST",
+        body: JSON.stringify(newlogin),
+        headers: {'Content-Type': 'application/json'},
+    }).then((response)=>{
+      if(response.status===401){
+        history.push("/loginfailed")
+      }else{
+        history.push("/homepage")
+      }
+    
+      });
+
+    };
+
+  return(
+    <form className="login-page" onSubmit={handleSubmit}>
+      
+     <h1 className="login-head">Login</h1>
+     <h4 className="please">Please enter your e-mail id and Password</h4>  
+    
+    <TextField id="email" 
+    name="email" 
+    value = {values.email} 
+    onChange={handleChange} 
+    onBlur={handleBlur}
+    type = "email" 
+    error={errors.email && touched.email}
+    helperText={errors.email && touched.email && errors.email}
+    placeholder = "Enter your Email"/>
+
+
+    <TextField id="password" 
+    name="password" 
+    value = {values.password} 
+    onChange={handleChange} 
+    onBlur={handleBlur}
+    type="password"
+    autoComplete="current-password"
+    error={errors.password && touched.password}
+    helperText={errors.password && touched.password && errors.password}
+    placeholder = "Enter your Password"/>
+    
+    <Button variant="outlined" type="submit">log in</Button>
+
+    
+  </form>
+    
+  );
+}
+
+function SignupPage(){
+  const history = useHistory();
+  const formvalidationschema = yup.object({
+    email: yup.string().min(5, "need a bigger email").required(),
+    password: yup.string().min(5).max(12).required(),
+  });
+
+  const {handleSubmit, values, handleChange, handleBlur, errors, touched} = useFormik({
+    initialValues: { email: "", password:""},
+    validationSchema: formvalidationschema,
+
+    onSubmit: (newSignup) => {
+      console.log("onsubmit", newSignup);
+      addData(newSignup);
+    }
+  });
+  const addData =(newSignup)=>{
+    console.log(newSignup)
+      fetch(`${API_URL}/signup`, {
+        method:"POST",
+        body: JSON.stringify(newSignup),
+        headers: {'Content-Type': 'application/json'},
+    }).then((response)=>{
+    if(response.status===400){
+      history.push("/signupfailed")
+    }else{
+      history.push("/homepage")
+    }
+    // console.log(response.status));
+    });
+    };
+  return(
+    <form className="login-page" onSubmit={handleSubmit}>
+    <div className="login-page">
+    <h1 className="login-head">sign up</h1>
+    <h4 className="please">Please enter your e-mail id and Password</h4>
+    <TextField id="email" 
+    name="email" 
+    value = {values.email} 
+    onChange={handleChange} 
+    onBlur={handleBlur}
+    type = "email" 
+    error={errors.email && touched.email}
+    helperText={errors.email && touched.email && errors.email}
+    placeholder = "Enter your Email"/>
+
+<TextField id="password" 
+    name="password" 
+    value = {values.password} 
+    onChange={handleChange} 
+    onBlur={handleBlur}
+    type="password"
+    autoComplete="current-password"
+    error={errors.password && touched.password}
+    helperText={errors.password && touched.password && errors.password}
+    placeholder = "Enter your Password"/>
+       <Button variant="contained" type="submit" >sign up</Button>
+      
+   </div>
+   </form>
+  );
+}
+
+function LoginFailed(){
+  return(
+    <div>
+      <img className="failed" src="https://icon-library.com/images/red-cross-icon-png/red-cross-icon-png-27.jpg" alt="Login failed" />
+      <h2>Invalid Credentials</h2>
+    </div>
+  );
+}
+
+function SignupSuccess(){
+  return(
+    <div>
+      <img className="success" src="https://tse4.mm.bing.net/th?id=OIP.kPQ0PJHdeZL0H9HLZfbsGQAAAA&pid=Api&P=0&w=214&h=177" alt="signup success" />
+      <h2>Successfully signed up</h2>
+    </div>
+  );
+}
+
+function SignupFailed(){
+  return(
+    <div>
+      <img className="failed" src="https://icon-library.com/images/red-cross-icon-png/red-cross-icon-png-27.jpg" alt="signup failed" />
+      <h2>email already exists or password must be longer</h2>
+    </div>
   );
 }

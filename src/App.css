@@ -16,6 +16,10 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 }
+.movies-section{
+  padding: 50px;
+ 
+}
 .ul-list{
   list-style: none;
   display: flex;
@@ -24,6 +28,10 @@ flex-direction: column;
   display: flex;
   flex-direction: column;
  gap: 10px;
+ padding-top: 50px;
+ padding-left: 100px;
+ padding-right: 100px;
+ padding-bottom: 500px;
 }
 .user-pic{
   height: 400px;
@@ -60,9 +68,15 @@ margin: 15px;
 
 .details{
   text-align: center;
-  
  font-weight: 500;
- padding: 10px;
+}
+.details-div{
+  text-align: center;
+  font-weight: 500;
+  padding-top: 20px;
+  padding-bottom: 200px;
+  padding-left: 250px;
+  padding-right: 250px;
 }
 .det{
   display: flex;
@@ -83,7 +97,7 @@ box-shadow: 5px 5px 5px rgb(46, 45, 45);
   height: 42rem;
 }
 .home{
-  color: crimson;
+  color: rgb(216, 70, 99);
   text-align: center;
   font-weight: 900;
   font-size: 3rem;
@@ -91,6 +105,13 @@ box-shadow: 5px 5px 5px rgb(46, 45, 45);
  justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 800px;
+}
+.home-det{
+  color: white;
+  font-size: 30px;
+  font-family: sans-serif;
 }
 .edit-delete{
   display: flex;
@@ -98,7 +119,126 @@ box-shadow: 5px 5px 5px rgb(46, 45, 45);
 }
 .count-edit{
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
+.login-page{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  align-items: stretch;
+  gap: 10px;
+}
+.login-head{
+  font-family: -webkit-pictograph ;
+  letter-spacing: 1px;
+  margin-top: 50px;
+}
+.please{
+  font-family: -webkit-pictograph ;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+.icons{
+  display: flex;
+  flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.success{
+  object-fit: cover;
+  height: 250px;
+  width: 250px;
+ border-radius: 60%;
+}
+.failed{
+  object-fit: cover;
+  height: 200px;
+  width: 200px;
+ border-radius: 60%;
+}
+.homepage-text{
+  font-family: sans-serif;
+  letter-spacing: 1px;
+}
+@media(max-width: 1200px){
+  .details-div{
+    text-align: center;
+    font-weight: 500;
+    padding-top: 20px;
+    padding-bottom: 200px;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  .iframe-size{
+    width: 600px;
+    height: 400px;
+  }
+}
+
+@media(max-width: 500px){
+
+  .movies-section{
+    padding: 10px;
+  }
+
+  .in-con {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 500px;
+}
+
+  .full-det{
+    border-radius: 5px;
+    width: 300px;
+    overflow: hidden;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    border: gray solid 3px;
+    height: min-content;
+  }
+  .home{
+    color: rgb(216, 70, 99);
+    text-align: center;
+    font-weight: 500;
+    font-size: 30px;
+  padding-left: 18px;
+  padding-right: 18px;
+  }
+  .notfound{
+    height: 200px;
+    width: 300px;
+  }
+
+.home-det{
+  color: white;
+  font-size: 25px;
+  font-family: sans-serif;
+}
+
+.details-div{
+  text-align: center;
+  font-weight: 500;
+  padding-top: 20px;
+  padding-bottom: 200px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.iframe-size{
+  width: 340px;
+  height: 390px;
+}
+
+.login-page {
+  padding-bottom: 350px;
+}
 }
 
 
