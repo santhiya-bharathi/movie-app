@@ -83,10 +83,6 @@ useEffect(()=>{
         <MovieList />
         </Route>
 
-        <Route path="/signupsuccess">
-          <SignupSuccess />
-        </Route>
-
         <Route path="/signupfailed">
           <SignupFailed />
         </Route>
@@ -541,8 +537,10 @@ function LoginPage(){
     placeholder = "Enter your Password"/>
     
     <Button variant="outlined" type="submit">log in</Button>
-
-    
+<div>
+<p>Email: test@gmail.com</p>
+<p>Password: password123@</p>
+</div>
   </form>
     
   );
@@ -605,7 +603,11 @@ function SignupPage(){
     helperText={errors.password && touched.password && errors.password}
     placeholder = "Enter your Password"/>
        <Button variant="contained" type="submit" >sign up</Button>
-      
+
+       <div>
+       <p>Email: test@gmail.com</p>
+<p>Password: password123@</p>
+</div>
    </div>
    </form>
   );
@@ -616,15 +618,6 @@ function LoginFailed(){
     <div>
       <img className="failed" src="https://icon-library.com/images/red-cross-icon-png/red-cross-icon-png-27.jpg" alt="Login failed" />
       <h2>Invalid Credentials</h2>
-    </div>
-  );
-}
-
-function SignupSuccess(){
-  return(
-    <div>
-      <img className="success" src="https://tse4.mm.bing.net/th?id=OIP.kPQ0PJHdeZL0H9HLZfbsGQAAAA&pid=Api&P=0&w=214&h=177" alt="signup success" />
-      <h2>Successfully signed up</h2>
     </div>
   );
 }
