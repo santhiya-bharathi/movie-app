@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useHistory } from "react-router-dom";
-import { API_URL } from './App';
+import { API_URL } from '../App';
 
 export function MovieDetails() {
   const history = useHistory();

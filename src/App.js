@@ -11,15 +11,15 @@ import Paper from '@mui/material/Paper';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useHistory } from "react-router-dom";
-import { NotFound } from './NotFound';
-import { Homepage } from './Homepage';
-import { Home } from './Home';
-import { MovieDetails } from './MovieDetails';
-import { EditMovie } from './EditMovie';
-import { AddMovie } from './AddMovie';
-import { MovieList } from './MovieList';
-import { LoginFailed, LoginPage } from './LoginPage';
-import { SignupFailed, SignupPage } from './SignupPage';
+import { NotFound } from './homepage/NotFound';
+import { Homepage } from './homepage/Homepage';
+import { Home } from './homepage/Home';
+import { MovieDetails } from './moviesdetails/MovieDetails';
+import { EditMovie } from './moviesdetails/EditMovie';
+import { AddMovie } from './addmovies/AddMovie';
+import { MovieList } from './moviesdetails/MovieList';
+import { LoginFailed, LoginPage } from './loginandsignup/LoginPage';
+import { SignupFailed, SignupPage } from './loginandsignup/SignupPage';
 
 export const API_URL = "https://movies-node-app.herokuapp.com";
 

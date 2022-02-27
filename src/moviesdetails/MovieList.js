@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useHistory } from "react-router-dom";
-import { API_URL } from './App';
+import { API_URL } from '../App';
 
 export function MovieList() {
   const [movies, setMovies] = useState([]);

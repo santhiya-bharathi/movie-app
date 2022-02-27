@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { API_URL } from './App';
+import { API_URL } from '../App';
 
 export function LoginPage() {
   const history = useHistory();

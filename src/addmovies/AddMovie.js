@@ -1,27 +1,12 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { API_URL } from './App';
+import { API_URL } from '../App';
 
-export function EditMovie() {
-
-  const { id } = useParams();
-
-  const [moviedet, setMoviedet] = useState(null);
-  useEffect(() => {
-    fetch(`${API_URL}/movies/${id}`, { method: "GET" })
-      .then((data) => data.json())
-      .then((mv) => setMoviedet(mv));
-  }, [id]);
-
-  return moviedet ? <UpdateMovie moviedet={moviedet} /> : "";
-
-}
-function UpdateMovie({ moviedet }) {
+export function AddMovie() {
   const history = useHistory();
 
   const formvalidationschema = yup.object({
@@ -33,31 +18,29 @@ function UpdateMovie({ moviedet }) {
   });
 
   const { handleSubmit, values, handleChange, handleBlur, errors, touched } = useFormik({
-    initialValues: { name: moviedet.name, pic: moviedet.pic, rating: moviedet.rating, summary: moviedet.summary, trailer: moviedet.trailer },
+    initialValues: { name: "", pic: "", rating: "", summary: "", trailer: "" },
 
     validationSchema: formvalidationschema,
 
-    onSubmit: (updatedMovie) => {
-      console.log("onsubmit", updatedMovie);
-      editMovie(updatedMovie);
+    onSubmit: (newMovies) => {
+      console.log("onsubmit", newMovies);
+      addMovie(newMovies);
     }
   });
 
-  const editMovie = (updatedMovie) => {
+  const addMovie = (newMovies) => {
 
-    console.log(updatedMovie);
-
-    fetch(`${API_URL}/movies/${moviedet._id}`, {
-      method: "PUT",
-      body: JSON.stringify(updatedMovie),
+    console.log(newMovies);
+    fetch(`${API_URL}/movies`, {
+      method: "POST",
+      body: JSON.stringify(newMovies),
       headers: { 'Content-Type': 'application/json' },
     }).then(() => history.push("/movielist"));
-  };
 
+  };
 
   return (
     <form onSubmit={handleSubmit} className="in-con">
-
 
       <TextField id="pic"
         name="pic"
@@ -110,7 +93,8 @@ function UpdateMovie({ moviedet }) {
         helperText={errors.trailer && touched.trailer && errors.trailer}
         variant="filled" />
 
-      <Button type="submit" variant="contained">Save</Button>
+      <Button type="submit" variant="contained">Add movies</Button>
+      <Button onClick={() => history.push("/homepage")} variant="outlined"><KeyboardBackspaceIcon />Homepage</Button>
 
     </form>
   );
