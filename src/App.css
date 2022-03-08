@@ -38,6 +38,18 @@ flex-direction: column;
   object-fit: cover;
   width: 400px;
 }
+.user-pic-home{
+  height: 300px;
+  object-fit: cover;
+  width: 250px;
+}
+.user-name-home{
+  font-family: 'Metal Mania', cursive;
+  letter-spacing: 3px;
+  margin: 3px;
+  color: white;
+  font-size: 20px;
+}
 .user-name{
   margin: 0;
 }
@@ -48,7 +60,6 @@ justify-content: space-evenly;
     align-items: center;
     justify-items: center;
 margin: 15px;
-
 }
 
 .full-det{
@@ -57,10 +68,21 @@ margin: 15px;
   overflow: hidden;
   font-family: sans-serif;
   letter-spacing: 1px;
-  transition: all 0.2s;
+  transition: all 0.5s;
   border: gray solid 3px;
   height: min-content;
 }
+
+.full-det-home{
+  border-radius: 5px;
+  width: min-content;
+  overflow: hidden;
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  height: min-content;
+  border: rgba(104, 102, 102, 0.322) solid 3px;
+}
+
 .button-like{
   display: flex;
   justify-content: flex-start;
@@ -132,12 +154,12 @@ box-shadow: 5px 5px 5px rgb(46, 45, 45);
   gap: 10px;
 }
 .login-head{
-  font-family: -webkit-pictograph ;
+  font-family: 'Open Sans', sans-serif;
   letter-spacing: 1px;
   margin-top: 50px;
 }
 .please{
-  font-family: -webkit-pictograph ;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   letter-spacing: 1px;
 }
@@ -163,6 +185,21 @@ box-shadow: 5px 5px 5px rgb(46, 45, 45);
   font-family: sans-serif;
   letter-spacing: 1px;
 }
+
+.signup-link{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.signup-word{
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+  font-size: 20px;
+  font-weight: 200;
+  text-decoration: underline;
+}
+
+
 @media(max-width: 1200px){
   .details-div{
     text-align: center;

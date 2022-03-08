@@ -68,7 +68,12 @@ export function LoginPage() {
         placeholder="Enter your Password" />
 
       <Button variant="outlined" type="submit">log in</Button>
-      <div>
+      <div className='signup-link'>
+          <p className="please">Don't have an account ?</p>
+          <p onClick={() => history.push("/signup")} className="signup-word">SIGN UP</p>
+        </div>
+        <div>
+        <p className="please">Sample Credentials</p>
         <p>Email: test@gmail.com</p>
         <p>Password: password123@</p>
       </div>

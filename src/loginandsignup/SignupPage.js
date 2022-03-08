@@ -31,7 +31,7 @@ export function SignupPage() {
       if (response.status === 400) {
         history.push("/signupfailed");
       } else {
-        history.push("/homepage");
+        history.push("/");
       }
       // console.log(response.status));
     });
@@ -62,11 +62,8 @@ export function SignupPage() {
           helperText={errors.password && touched.password && errors.password}
           placeholder="Enter your Password" />
         <Button variant="contained" type="submit">sign up</Button>
-
-        <div>
-          <p>Email: test@gmail.com</p>
-          <p>Password: password123@</p>
-        </div>
+        
+      
       </div>
     </form>
   );

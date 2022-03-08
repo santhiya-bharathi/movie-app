@@ -8,9 +8,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useHistory } from "react-router-dom";
-import { API_URL } from '../App';
+import { API_URL, Buttonbar } from '../App';
 
 export function MovieList() {
+
   const [movies, setMovies] = useState([]);
 
   const getMovies = () => {
@@ -29,6 +30,8 @@ export function MovieList() {
 
   const history = useHistory();
   return (
+    <div>
+    <Buttonbar />
     <section className='movies-section'>
 
       {movies.map(({ pic, name, rating, summary, id, _id }) => (
@@ -47,8 +50,10 @@ export function MovieList() {
         <Button onClick={() => history.push("/homepage")} variant="outlined"><KeyboardBackspaceIcon />Homepage</Button>
       </div>
     </section>
+    </div>
   );
 }
+
 function Movie({ pic, name, rating, summary, id, deleteButton, editButton }) {
   const [show, setShow] = useState(true);
   const history = useHistory();

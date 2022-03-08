@@ -4,7 +4,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { API_URL } from '../App';
+import { API_URL, Buttonbar } from '../App';
 
 export function AddMovie() {
   const history = useHistory();
@@ -40,6 +40,8 @@ export function AddMovie() {
   };
 
   return (
+    <div>
+      <Buttonbar />
     <form onSubmit={handleSubmit} className="in-con">
 
       <TextField id="pic"
@@ -97,5 +99,6 @@ export function AddMovie() {
       <Button onClick={() => history.push("/homepage")} variant="outlined"><KeyboardBackspaceIcon />Homepage</Button>
 
     </form>
+    </div>
   );
 }

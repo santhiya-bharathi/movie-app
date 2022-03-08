@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { API_URL } from '../App';
+import { API_URL, Buttonbar } from '../App';
 
 export function EditMovie() {
 
@@ -56,8 +56,9 @@ function UpdateMovie({ moviedet }) {
 
 
   return (
+    <div>
+    <Buttonbar />
     <form onSubmit={handleSubmit} className="in-con">
-
 
       <TextField id="pic"
         name="pic"
@@ -113,5 +114,6 @@ function UpdateMovie({ moviedet }) {
       <Button type="submit" variant="contained">Save</Button>
 
     </form>
+    </div>
   );
 }
