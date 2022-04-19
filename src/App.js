@@ -17,8 +17,7 @@ import { MovieDetails } from './moviesdetails/MovieDetails';
 import { EditMovie } from './moviesdetails/EditMovie';
 import { AddMovie } from './addmovies/AddMovie';
 import { MovieList } from './moviesdetails/MovieList';
-import { LoginFailed, LoginPage } from './loginandsignup/LoginPage';
-import { SignupFailed, SignupPage } from './loginandsignup/SignupPage';
+
 
 export const API_URL = "https://movies-node-app.herokuapp.com";
 
@@ -51,13 +50,10 @@ useEffect(()=>{
       <Switch>
       
       <Route exact path="/">
-      <LoginPage />
+      <Home />
         </Route>
 
 
-        <Route path="/signup">
-          <SignupPage />
-        </Route>
 
         <Route path="/homepage">
         <Home />
@@ -79,13 +75,7 @@ useEffect(()=>{
         <MovieList />
         </Route>
 
-        <Route path="/signupfailed">
-          <SignupFailed />
-        </Route>
-
-        <Route path="/loginfailed">
-          <LoginFailed />
-        </Route>
+     
 
         <Route path="**">
           <NotFound/>
@@ -110,7 +100,7 @@ export function Buttonbar(){
 
     <AppBar position="static">
     <Toolbar>
-    <Button varient="text" color="inherit" onClick={()=>history.push("/homepage")}>Home</Button>
+    <Button varient="text" color="inherit" onClick={()=>history.push("/")}>Home</Button>
     <Button variant="text" color="secondary" onClick={() => history.push("/movielist")}>Movielist</Button>
     <Button variant="text" color="secondary" onClick={() => history.push("/addmovies")}>AddMovies</Button>
 
